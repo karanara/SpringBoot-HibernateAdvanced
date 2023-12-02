@@ -1,5 +1,8 @@
 package com.example.springboot.hibernatejpa.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -31,6 +35,9 @@ public class Instructor {
 	@OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "instructor_detail_id")
 	private InstructorDetail instructorDetail;
+	
+	@OneToMany(mappedBy="instructor",cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+	private List<Course> courses;
 
 	public Instructor(String first_name, String last_name, String email, InstructorDetail instructorDetail) {
 		this.first_name = first_name;
@@ -41,8 +48,10 @@ public class Instructor {
 
 	
 
+	
+
+
 	public Instructor(String first_name, String last_name, String email) {
-		super();
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.email = email;
@@ -91,6 +100,25 @@ public class Instructor {
 	public void setInstructorDetail(InstructorDetail instructorDetail) {
 		this.instructorDetail = instructorDetail;
 	}
+	
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
+
+	//add convienence method to add course
+	
+	public void add(Course course) {
+		if(courses==null) {
+			courses= new ArrayList<>();
+		}
+		courses.add(course);
+		course.setInstructor(this);
+	}
+
 	@Override
 	public String toString() {
 		return "Instructor [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", email=" + email

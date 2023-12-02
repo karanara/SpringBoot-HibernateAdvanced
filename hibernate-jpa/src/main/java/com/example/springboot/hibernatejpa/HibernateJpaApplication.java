@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.example.springboot.hibernatejpa.DAO.AppDAO;
+import com.example.springboot.hibernatejpa.entity.Course;
 import com.example.springboot.hibernatejpa.entity.Instructor;
 import com.example.springboot.hibernatejpa.entity.InstructorDetail;
 
@@ -22,9 +23,25 @@ public class HibernateJpaApplication {
             	//findInstructor(appDAO);
             	//deleteInstructor(appDAO);
             	//findInstructorDetailById(appDAO);
-            	deleteInstructorById(appDAO);
+            	//deleteInstructorById(appDAO);
+            	createInstructorWithCourses(appDAO);
             };
     }
+	private void createInstructorWithCourses(AppDAO appDAO) {
+		// TODO Auto-generated method stub
+		Instructor instructor = new Instructor(
+				"ramya","karanam","ramya123@gmail.com"
+				);
+		InstructorDetail instructorDetail =
+				 new InstructorDetail("https://github.com/karanara","practice");
+		instructor.setInstructorDetail(instructorDetail);
+		Course course1= new Course("JAVA");
+		Course course2= new Course("Python");
+		instructor.add(course1);
+		instructor.add(course2);
+		appDAO.save(instructor);
+		
+	}
 	private void deleteInstructorById(AppDAO appDAO) {
 		// TODO Auto-generated method stub
 		//InstructorDetail instructorDetail = appDAO.findInstructorDetailById(3);
