@@ -27,9 +27,18 @@ public class HibernateJpaApplication {
             	//findInstructorDetailById(appDAO);
             	//deleteInstructorById(appDAO);
             	//createInstructorWithCourses(appDAO);
-            	findCoursesForInstructor(appDAO);
+            	//findCoursesForInstructor(appDAO);
+            	findCoursesForInstructorByJoinFetch(appDAO);
             };
     }
+	private void findCoursesForInstructorByJoinFetch(AppDAO appDAO) {
+		// TODO Auto-generated method stub
+		Instructor instructor =appDAO.findInstructorByJoinFetch(1);
+		System.out.println("Instructor Details  "+instructor);
+		System.out.println("InstructorDetail of instructor  "+ instructor.getInstructorDetail());
+		System.out.println("Instructor Courses  "+ instructor.getCourses());
+		
+	}
 	private void findCoursesForInstructor(AppDAO appDAO) {
 		// TODO Auto-generated method stub
 		   Instructor instructor = appDAO.findInstructorById(1);
