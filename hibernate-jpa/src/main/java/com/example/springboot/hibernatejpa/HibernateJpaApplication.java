@@ -20,9 +20,23 @@ public class HibernateJpaApplication {
             return runner->{
             	//createInstructor(appDAO);
             	//findInstructor(appDAO);
-            	deleteInstructor(appDAO);
+            	//deleteInstructor(appDAO);
+            	//findInstructorDetailById(appDAO);
+            	deleteInstructorById(appDAO);
             };
     }
+	private void deleteInstructorById(AppDAO appDAO) {
+		// TODO Auto-generated method stub
+		//InstructorDetail instructorDetail = appDAO.findInstructorDetailById(3);
+        //instructorDetail.setInstructor(null);
+        appDAO.deleteInstructorDetailById(3);
+	}
+	private void findInstructorDetailById(AppDAO appDAO) {
+		// TODO Auto-generated method stub
+		InstructorDetail instructorDetail = appDAO.findInstructorDetailById(3);
+		System.out.println(instructorDetail);
+		System.out.println(instructorDetail.getInstructor());
+	}
 	private void deleteInstructor(AppDAO appDAO) {
 		// TODO Auto-generated method stub
            appDAO.deleteInstructorById(2);

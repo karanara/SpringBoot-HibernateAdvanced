@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.springboot.hibernatejpa.entity.Instructor;
+import com.example.springboot.hibernatejpa.entity.InstructorDetail;
 
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -40,6 +41,20 @@ public class AppDAOImpl implements AppDAO {
 		Instructor theInstructor = entityManager.find(Instructor.class,Id);
         entityManager.remove(theInstructor);
 
+	}
+	@Override
+	public InstructorDetail findInstructorDetailById(int Id) {
+		// TODO Auto-generated method stub
+		InstructorDetail instructorDetail = entityManager.find(InstructorDetail.class, Id);
+		return instructorDetail;
+	}
+	@Override
+	@Transactional
+	public void deleteInstructorDetailById(int Id) {
+		// TODO Auto-generated method stub
+		InstructorDetail instructorDetail = entityManager.find(InstructorDetail.class, Id);
+		instructorDetail.getInstructor().setInstructorDetail(null);
+		entityManager.remove(instructorDetail);
 	}
 
 }

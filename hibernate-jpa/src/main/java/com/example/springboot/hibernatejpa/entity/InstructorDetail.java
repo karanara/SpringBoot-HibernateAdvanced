@@ -1,10 +1,12 @@
 package com.example.springboot.hibernatejpa.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,6 +25,11 @@ public class InstructorDetail {
 	
 	@Column(name="hobby")
 	private String hobby;
+	
+	//bidirectional mapping 
+	@OneToOne(mappedBy="instructorDetail",cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+	//only delete instructor detail not instructor
+	private Instructor instructor;
 
 	public InstructorDetail(String youtube_channel, String hobby) {
 		this.youtube_channel = youtube_channel;
@@ -57,6 +64,14 @@ public class InstructorDetail {
 		this.hobby = hobby;
 	}
 	
+	public Instructor getInstructor() {
+		return instructor;
+	}
+
+	public void setInstructor(Instructor instructor) {
+		this.instructor = instructor;
+	}
+
 	@Override
 	public String toString() {
 		return "InstructorDetail [id=" + id + ", youtube_channel=" + youtube_channel + ", hobby=" + hobby + "]";
