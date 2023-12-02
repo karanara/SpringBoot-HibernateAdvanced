@@ -11,6 +11,7 @@ import com.example.springboot.hibernatejpa.DAO.AppDAO;
 import com.example.springboot.hibernatejpa.entity.Course;
 import com.example.springboot.hibernatejpa.entity.Instructor;
 import com.example.springboot.hibernatejpa.entity.InstructorDetail;
+import com.example.springboot.hibernatejpa.entity.Review;
 
 @SpringBootApplication
 public class HibernateJpaApplication {
@@ -31,9 +32,31 @@ public class HibernateJpaApplication {
             	//findCoursesForInstructorByJoinFetch(appDAO);
             	//updateInstructor(appDAO);
             	//updateCourse(appDAO);
-            	deleteCourse(appDAO);
+            	//deleteCourse(appDAO);
+            	//CreateCourseWithReviews(appDAO);
+            	//findCourseandReviews(appDAO);
+            	deleteCourseWithReviews(appDAO);
             };
     }
+	private void deleteCourseWithReviews(AppDAO appDAO) {
+		// TODO Auto-generated method stub
+		appDAO.deleteCourseWithReviewByCourseId(12);
+		//delete reveiws since it is unidirectional and cascade.all
+	}
+	private void findCourseandReviews(AppDAO appDAO) {
+		// TODO Auto-generated method stub
+		Course course = appDAO.findCourseWithReviewsByCourseId(12);
+		System.out.println(course);
+		System.out.println(course.getReviews());
+	}
+	private void CreateCourseWithReviews(AppDAO appDAO) {
+		// TODO Auto-generated method stub
+		Course course = new Course("JAVA with Spring");
+		course.add(new Review("ccovered all concepts with complete examples"));
+		course.add(new Review("need more concepts"));
+		course.add(new Review("expecting more releases"));
+		appDAO.saveCourseWithReviews(course);
+	}
 	private void deleteCourse(AppDAO appDAO) {
 		// TODO Auto-generated method stub
 		appDAO.deleteCourse(10);

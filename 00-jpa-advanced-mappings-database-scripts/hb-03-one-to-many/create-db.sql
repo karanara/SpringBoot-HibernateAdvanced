@@ -39,7 +39,7 @@ CREATE TABLE `course` (
   
   PRIMARY KEY (`id`),
   
-  UNIQUE KEY `TITLE_UNIQUE` (`title`),
+  UNIQUE KEY `TITLE_UNIQUE` (`titlinstructore`),
   
   KEY `FK_INSTRUCTOR_idx` (`instructor_id`),
   

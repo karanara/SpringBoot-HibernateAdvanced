@@ -26,4 +26,10 @@ public interface AppDAO {
 	Course getCourseById(int Id);
 	 //delete course 
 	 void deleteCourse(int Id);
-}
+	//creating courses with reviews
+	 void saveCourseWithReviews(Course course);
+	 //retreiving courses with reviews
+	 Course findCourseWithReviewsByCourseId(int Id);
+	 //deleting courses with reviews since unidirectional
+	 void deleteCourseWithReviewByCourseId(int Id);
+} 
