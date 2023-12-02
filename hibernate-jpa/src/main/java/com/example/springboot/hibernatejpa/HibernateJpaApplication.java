@@ -25,12 +25,35 @@ public class HibernateJpaApplication {
             	//findInstructor(appDAO);
             	//deleteInstructor(appDAO);
             	//findInstructorDetailById(appDAO);
-            	//deleteInstructorById(appDAO);
+            	//deleteInstructorByInstructionId(appDAO);
             	//createInstructorWithCourses(appDAO);
             	//findCoursesForInstructor(appDAO);
-            	findCoursesForInstructorByJoinFetch(appDAO);
+            	//findCoursesForInstructorByJoinFetch(appDAO);
+            	//updateInstructor(appDAO);
+            	//updateCourse(appDAO);
+            	deleteCourse(appDAO);
             };
     }
+	private void deleteCourse(AppDAO appDAO) {
+		// TODO Auto-generated method stub
+		appDAO.deleteCourse(10);
+		
+	}
+	private void updateCourse(AppDAO appDAO) {
+		// TODO Auto-generated method stub
+		Course course = appDAO.getCourseById(10);
+		System.out.println(course);
+		course.setTitle("Spring Boot by luv darby");
+		appDAO.updateCourse(course);
+		
+	}
+	private void updateInstructor(AppDAO appDAO) {
+		// TODO Auto-generated method stub
+		Instructor instructor = appDAO.findInstructorById(1);
+		instructor.setLast_name("Srinivas");
+		appDAO.updateInstructor(instructor);
+		
+	}
 	private void findCoursesForInstructorByJoinFetch(AppDAO appDAO) {
 		// TODO Auto-generated method stub
 		Instructor instructor =appDAO.findInstructorByJoinFetch(1);
@@ -62,7 +85,7 @@ public class HibernateJpaApplication {
 		appDAO.save(instructor);
 		
 	}
-	private void deleteInstructorById(AppDAO appDAO) {
+	private void deleteInstructorByInstructionId(AppDAO appDAO) {
 		// TODO Auto-generated method stub
 		//InstructorDetail instructorDetail = appDAO.findInstructorDetailById(3);
         //instructorDetail.setInstructor(null);
@@ -76,7 +99,7 @@ public class HibernateJpaApplication {
 	}
 	private void deleteInstructor(AppDAO appDAO) {
 		// TODO Auto-generated method stub
-           appDAO.deleteInstructorById(2);
+           appDAO.deleteInstructorById(1);
 	}
 	private void findInstructor(AppDAO appDAO ) {
 		// TODO Auto-generated method stub

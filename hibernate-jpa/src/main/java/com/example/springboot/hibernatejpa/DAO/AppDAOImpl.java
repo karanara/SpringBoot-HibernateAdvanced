@@ -29,8 +29,6 @@ public class AppDAOImpl implements AppDAO {
 		entityManager.persist(instructor);
 	}
 
-	
-
 	@Override
 	public Instructor findInstructorById(int Id) {
 		// TODO Auto-generated method stub
@@ -43,8 +41,12 @@ public class AppDAOImpl implements AppDAO {
 	public void deleteInstructorById(int Id) {
 		// TODO Auto-generated method stub
 		Instructor theInstructor = entityManager.find(Instructor.class,Id);
+		//to prevent constraint voilation since havign one to many relationship
+		List<Course> courses = theInstructor.getCourses();
+		for(Course temp :courses) {
+			temp.setInstructor(null);
+		}
         entityManager.remove(theInstructor);
-
 	}
 	@Override
 	public InstructorDetail findInstructorDetailById(int Id) {
@@ -57,6 +59,7 @@ public class AppDAOImpl implements AppDAO {
 	public void deleteInstructorDetailById(int Id) {
 		// TODO Auto-generated method stub
 		InstructorDetail instructorDetail = entityManager.find(InstructorDetail.class, Id);
+		//break bi directional break
 		instructorDetail.getInstructor().setInstructorDetail(null);
 		entityManager.remove(instructorDetail);
 	}
@@ -75,6 +78,33 @@ public class AppDAOImpl implements AppDAO {
 		"JOIN FETCH i.instructorDetail " + "where i.id=:data", Instructor.class);
 		query.setParameter("data", Id);
 		return query.getSingleResult();
+	}
+	@Override
+	@Transactional
+	public void updateInstructor(Instructor instructor) {
+		// TODO Auto-generated method stub
+		entityManager.merge(instructor);
+	}
+	@Override
+	@Transactional
+	public void updateCourse(Course course) {
+		// TODO Auto-generated method stub
+		entityManager.merge(course);
+		
+	}
+	@Override
+	public Course getCourseById(int Id) {
+		// TODO Auto-generated method stub
+		Course course = entityManager.find(Course.class, Id);
+		return course;
+	}
+	
+	@Override
+	@Transactional
+	public void deleteCourse(int Id) {
+		// TODO Auto-generated method stub
+		Course course = entityManager.find(Course.class,Id);
+		entityManager.remove(course);
 	}
 
 }
