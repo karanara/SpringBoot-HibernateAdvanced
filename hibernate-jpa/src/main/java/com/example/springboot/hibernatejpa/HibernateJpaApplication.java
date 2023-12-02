@@ -1,5 +1,7 @@
 package com.example.springboot.hibernatejpa;
 
+import java.util.List;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,9 +26,18 @@ public class HibernateJpaApplication {
             	//deleteInstructor(appDAO);
             	//findInstructorDetailById(appDAO);
             	//deleteInstructorById(appDAO);
-            	createInstructorWithCourses(appDAO);
+            	//createInstructorWithCourses(appDAO);
+            	findCoursesForInstructor(appDAO);
             };
     }
+	private void findCoursesForInstructor(AppDAO appDAO) {
+		// TODO Auto-generated method stub
+		   Instructor instructor = appDAO.findInstructorById(1);
+		   System.out.println("Finding Instructor  "+ instructor);
+           List<Course> courses= appDAO.findCoursesForInstructor(1);
+           instructor.setCourses(courses);
+           System.out.println("COurses for Instructor:  " + instructor.getCourses());
+	}
 	private void createInstructorWithCourses(AppDAO appDAO) {
 		// TODO Auto-generated method stub
 		Instructor instructor = new Instructor(
