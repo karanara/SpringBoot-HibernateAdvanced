@@ -2,6 +2,7 @@ package com.example.springboot.hibernatejpa.DAO;
 
 import com.example.springboot.hibernatejpa.entity.Instructor;
 import com.example.springboot.hibernatejpa.entity.InstructorDetail;
+import com.example.springboot.hibernatejpa.entity.Student;
 
 import java.util.List;
 
@@ -32,4 +33,11 @@ public interface AppDAO {
 	 Course findCourseWithReviewsByCourseId(int Id);
 	 //deleting courses with reviews since unidirectional
 	 void deleteCourseWithReviewByCourseId(int Id);
+	 Course findCourseAndStudentsByCourseId(int theId);
+
+	    Student findStudentAndCoursesByStudentId(int theId);
+
+	    void update(Student tempStudent);
+
+	    void deleteStudentById(int theId);
 } 
